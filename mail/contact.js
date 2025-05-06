@@ -15,16 +15,16 @@ $(function () {
             $this.prop("disabled", true);
 
             $.ajax({
-                url: "contact.php",
-                type: "POST",
+                url: "https://formspree.io/f/xwpoondk",
+                method: "POST",
                 data: {
                     name: name,
                     email: email,
                     subject: subject,
                     message: message
                 },
-                cache: false,
-                success: function () {
+                dataType: "json",
+                success: function (response) {
                     $('#success').html("<div class='alert alert-success'>");
                     $('#success > .alert-success').html("<button type='button' class='close' data-dismiss='alert' aria-hidden='true'>&times;")
                             .append("</button>");
@@ -38,7 +38,7 @@ $(function () {
                     $('#success').html("<div class='alert alert-danger'>");
                     $('#success > .alert-danger').html("<button type='button' class='close' data-dismiss='alert' aria-hidden='true'>&times;")
                             .append("</button>");
-                    $('#success > .alert-danger').append($("<strong>").text("Sorry " + name + ", it seems that our mail server is not responding. Please try again later!"));
+                    $('#success > .alert-danger').append($("<strong>").text("Sorry " + name + ", it seems that there was an error sending your message. Please try again later!"));
                     $('#success > .alert-danger').append('</div>');
                     $('#contactForm').trigger("reset");
                 },
